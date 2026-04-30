@@ -12,14 +12,14 @@ namespace csharptest.Pages
             _httpClientFactory = httpClientFactory;
         }
 
-        public Pais InfoPais { get; set; }
-        public string CodigoPais { get; set; }
+        public Pais? InfoPais { get; set; }
+        public string? CodigoPais { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string cod) {
             CodigoPais = cod;
             var client = _httpClientFactory.CreateClient("RestCountries");
 
-            var response = await client.GetAsync($"countriesfile/{cod}");
+            var response = await client.GetAsync($"alpha/{cod}");
             if (!response.IsSuccessStatusCode) {
                 return NotFound();
             }
@@ -29,11 +29,13 @@ namespace csharptest.Pages
 
             var artigoResponse = JsonSerializer.Deserialize<List<CountryApiResponse>>(json, options)?.FirstOrDefault();
 
-            InfoPais = new Pais {
-                OfficialName = artigoResponse.name?.official,
-                Cca2 = artigoResponse.cca2,
-                FlagUrl = artigoResponse.flags?.png
-            };
+            if (artigoResponse != null) {
+                InfoPais = new Pais {
+                    OfficialName = artigoResponse.name?.official ?? "",
+                    Cca2 = artigoResponse.cca2 ?? "",
+                    FlagUrl = artigoResponse.flags?.png ?? ""
+                };
+            }
 
             return Page();
         }

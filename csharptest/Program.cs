@@ -6,7 +6,7 @@ builder.Services.AddRazorPages();
 //builder.Services.AddHttpClient();
 builder.Services.AddHttpClient("RestCountries", c =>
 {
-    c.BaseAddress = new Uri(" https://restcountries.com/v3.1/all?fields=name,cca2,flags");
+    c.BaseAddress = new Uri("https://restcountries.com/v3.1/");
 })
 .ConfigurePrimaryHttpMessageHandler(() =>
 {

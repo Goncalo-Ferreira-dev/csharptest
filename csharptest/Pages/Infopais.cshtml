@@ -3,6 +3,14 @@
 @{
 }
 
-<h1>@Model.InfoPais.OfficialName</h1>
-<p><strong>@Model.CodigoPais</strong></p>
-<img src="@Model.InfoPais.FlagUrl" alt="@Model.InfoPais.OfficialName" style="width:100%;" />
+@if (Model.InfoPais != null)
+{
+    <h1>@Model.InfoPais.OfficialName</h1>
+    <p><strong>@Model.CodigoPais</strong></p>
+    <img src="@Model.InfoPais.FlagUrl" alt="@Model.InfoPais.OfficialName" style="width:100%;" />
+}
+else
+{
+    <h1>País não encontrado</h1>
+    <p>O código do país (@Model.CodigoPais) não foi encontrado na API.</p>
+}
