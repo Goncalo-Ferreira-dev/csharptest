@@ -1,12 +1,18 @@
 var builder = WebApplication.CreateBuilder(args);
+var builder2 = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder2.Services.AddRazorPages();
 
 //builder.Services.AddHttpClient();
 builder.Services.AddHttpClient("RestCountries", c =>
 {
     c.BaseAddress = new Uri("https://restcountries.com/v3.1/");
+});
+builder2.Services.AddHttpClient("Listdragonball", c =>
+{
+    c.BaseAddress = new Uri("https://dragonball-api.com/api/characters/");
 })
 .ConfigurePrimaryHttpMessageHandler(() =>
 {
@@ -17,6 +23,7 @@ builder.Services.AddHttpClient("RestCountries", c =>
 });
 
 var app = builder.Build();
+app = builder2.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -37,3 +44,4 @@ app.MapRazorPages()
    .WithStaticAssets();
 
 app.Run();
+

@@ -1,0 +1,49 @@
+﻿@page
+
+@model Index2Model
+
+@{
+
+    ViewData["Title"] = "Home page";
+
+}
+
+
+<h1>Lista de Personagens</h1>
+
+
+@if (Model.Personagens?.Count > 0)
+
+{
+
+    <div style="display: flex; flex-wrap: wrap;">
+
+        @foreach (var personagem in Model.Personagens)
+
+        {
+
+            <div style="border: 1px solid #ccc; margin: 10px; padding: 10px; width: 200px;">
+
+                <img src="@personagem.imgUrl" alt="Imagem de @personagem.name" width="100" />
+
+                <p><strong>@personagem.name</strong></p>
+
+                <p>ID: @personagem.id</p>
+
+                <a asp-page="/InfoPersonagem" asp-route-cod="@personagem.id">Ver Info</a>
+
+            </div>
+
+        }
+
+    </div>
+
+}
+
+else
+
+{
+
+    <p>ERRO : não temos lista </p>
+
+}

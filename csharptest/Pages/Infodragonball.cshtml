@@ -1,0 +1,16 @@
+﻿@page
+@model ListdragonballModel
+@{
+}
+
+@if (Model.InfoPersonagem != null)
+{
+    <h1>@Model.InfoPersonagem.name</h1>
+    <p><strong>@Model.id</strong></p>
+    <img src="@Model.InfoPersonagem.imgUrl" alt="@Model.InfoPersonagem.name" style="width:100%;" />
+}
+else
+{
+    <h1>Personagem não encontrado</h1>
+    <p>O código do personagem (@Model.id) não foi encontrado na API.</p>
+}
